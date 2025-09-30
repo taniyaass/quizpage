@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Quiz</title>
+  <link rel="stylesheet" href="./quizpage.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo">Quiz World</div>
+    <nav class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">More Quiz</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <div class="quiz-container">
+    <h1>Quiz World by Taniya</h1>
+    <form id="quiz-form">
+
+      <div class="question">
+        <p>1. How many states are there in United States of America (USA)?</p>
+        <label><input type="radio" name="q1" value="50"> 50 </label>
+        <label><input type="radio" name="q1" value="42"> 42 </label>
+        <label><input type="radio" name="q1" value="51"> 51 </label>
+      </div>
+
+      <div class="question">
+        <p>2. Which of these are programming languages?</p>
+        <label><input type="checkbox" name="q2" value="Python"> Python</label>
+        <label><input type="checkbox" name="q2" value="Java"> Java</label>
+        <label><input type="checkbox" name="q2" value="Excel"> Excel</label>
+      </div>
+
+      <div class="question">
+        <p>3. What is the capital of New York State?</p>
+        <label><input type="radio" name="q3" value="Tokyo"> Tokyo</label>
+        <label><input type="radio" name="q3" value="Albany"> Albany</label>
+        <label><input type="radio" name="q3" value="Delhi"> Delhi</label>
+      </div>
+
+      <div class="question">
+        <p>4. Which of these books return by Jenny Han</p>
+        <label><input type="checkbox" name="q4" value="We'll Always Have Summer"> We'll Always Have Summer</label>
+        <label><input type="checkbox" name="q4" value="P.S. I Still Love You"> P.S. I Still Love You</label>
+        <label><input type="checkbox" name="q4" value="Wulthering Heights"> Wulthering Heights</label>
+      </div>
+
+      <div class="question">
+        <p>5. Who is the CEO of ZEPTO?</p>
+        <label><input type="radio" name="q5" value="Aadit Palicha">Aadit Palicha</label>
+        <label><input type="radio" name="q5" value="undar Pichai">Sundar Pichai</label>
+        <label><input type="radio" name="q5" value="Andy Jassy">Andy Jassy</label>
+      </div>
+
+      <div class="question">
+        <p>6. Select the writings of William Shakespeare: </p>
+        <label><input type="checkbox" name="q6" value="Hamlet">Hamlet</label>
+        <label><input type="checkbox" name="q6" value="Sonnets">Sonnets</label>
+        <label><input type="checkbox" name="q6" value="Stanzas">Stanzas</label>
+      </div>
+
+      <div class="question">
+        <p>7. Who is the author of the famous book 'IKIGAI'?</p>
+        <label><input type="radio" name="q7" value="Hector Garcia and Francesc Miralles">Hector Garcia and Francesc Miralles</label>
+        <label><input type="radio" name="q7" value="Maya Angelou">Maya Angelou</label>
+        <label><input type="radio" name="q7" value="James Baldwin">James Baldwin</label>
+      </div>
+
+      <div class="question">
+        <p>8. Which of these are web browsers?</p>
+        <label><input type="checkbox" name="q8" value="Google Chrome"> Google Chrome</label>
+        <label><input type="checkbox" name="q8" value="Mozilla Firefox"> Mozilla Firefox</label>
+        <label><input type="checkbox" name="q8" value="WhatsApp"> WhatsApp</label>
+      </div>
+
+      <div class="question">
+        <p>9. What is the chemical symbol for Salt?</p>
+        <label><input type="radio" name="q9" value="NaCl">NaCl</label>
+        <label><input type="radio" name="q9" value="NaCl2">NaCl2</label>
+        <label><input type="radio" name="q9" value="NaCl4">NaCl4</label>
+      </div>
+
+      <div class="question">
+        <p>10. Who all are in there in Titanic movie?</p>
+        <label><input type="checkbox" name="q10" value="Jasmine">Jasmine</label>
+        <label><input type="checkbox" name="q10" value="Rose">Rose</label>
+        <label><input type="checkbox" name="q10" value="Jack">Jack</label>
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("quiz-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      let score = 0;
+
+      // Correct answers
+      const answers = {
+        q1: "50",
+        q2: ["Python", "Java"],
+        q3: "Albany",
+        q4: ["We'll Always Have Summer", "P.S. I Still Love You"],
+        q5: "Aadit Palicha",
+        q6: ["Hamlet", "Sonnets"],
+        q7: "Hector Garcia and Francesc Miralles",
+        q8: ["Google Chrome", "Mozilla Firefox"],
+        q9: "NaCl",
+        q10: ["Rose", "Jack"]
+      };
+
+      ["q1","q3","q5","q7","q9"].forEach(q => {
+        let selected = document.querySelector(`input[name="${q}"]:checked`);
+        if (selected && selected.value === answers[q]) score++;
+      });
+
+      
+      ["q2","q4","q6","q8","q10"].forEach(q => {
+        let selected = Array.from(document.querySelectorAll(`input[name="${q}"]:checked`)).map(i => i.value);
+        if (selected.length > 0 && selected.every(val => answers[q].includes(val)) && selected.length === answers[q].length) {
+          score++;
+        }
+      });
+
+     
+      alert(`Well Done!,You Scored ${score} / 10 🎉`);
+    });
+  </script>
+</body>
+</html>
